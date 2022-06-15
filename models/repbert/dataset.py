@@ -53,10 +53,15 @@ def load_querydoc_pairs(msmarco_dir, mode):
             qid, _, pid, _ = line.split()
             qrels[int(qid)].add(int(pid))
     else: 
-        for line in open(f"{msmarco_dir}/top1000.{mode}"):
-            qid, pid, _, _ = line.split("\t")
+        # for line in open(f"{msmarco_dir}/top1000.{mode}"):
+        #     qid, pid, _, _ = line.split("\t")
+        #     qids.append(int(qid))
+        #     pids.append(int(pid))
+        for line in open(f"{msmarco_dir}/qrels.train.tsv"):
+            qid, _, pid, _ = line.split()
             qids.append(int(qid))
             pids.append(int(pid))
+            
     qrels = dict(qrels)
     if not mode == "train":
         labels, qrels = None, None
